@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(RockOut());
+import 'list.dart';
+import 'addGym.dart';
 
-class RockOut extends StatelessWidget
+void main() => runApp(RockOutMain());
+
+class RockOutMain extends StatelessWidget
 {
-
   @override
   Widget build(BuildContext context)
   {
@@ -15,42 +17,13 @@ class RockOut extends StatelessWidget
   }
 }
 
-class GymNames extends StatefulWidget
+class AddGymWindow extends StatelessWidget
 {
-  @override
-  GymNameState createState() => GymNameState();
-}
-
-class GymNameState extends State<GymNames>
-{
-  final gymNames = <String>['Crux', 'Boulder', 'Klimzaal Wallstreet',
-    'Klimzaal Blok'];
-
   @override
   Widget build(BuildContext context)
   {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Gym List"),
-      ),
-      body: buildList(),
-    );
-  }
-
-  Widget buildList()
-  {
-    return ListView.separated(
-      separatorBuilder: (context, index) => Divider(
-        color: Colors.black,
-      ),
-      itemCount: gymNames.length,
-      itemBuilder: (BuildContext context, int index)
-      {
-        return Container(
-          padding: const EdgeInsets.all(8),
-          child: Text('${gymNames[index]}', style: TextStyle(fontSize: 21.0)),
-        );
-      },
+    return MaterialApp(
+      home: AddGym(),
     );
   }
 }
