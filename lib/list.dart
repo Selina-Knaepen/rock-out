@@ -19,6 +19,7 @@ class GymNameState extends State<GymNames>
     return Scaffold(
       appBar: AppBar(
         title: Text("Gym List"),
+        backgroundColor: Color.fromRGBO(150, 182, 249, 1.0),
       ),
       body: buildList(),
       floatingActionButton: FloatingActionButton(
@@ -28,7 +29,7 @@ class GymNameState extends State<GymNames>
           );
         },
         child: Icon(Icons.add),
-        backgroundColor: Colors.indigoAccent,
+        backgroundColor: Color.fromRGBO(181, 152, 240, 1.0),
       ),
     );
   }
