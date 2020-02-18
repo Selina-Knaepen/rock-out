@@ -23,6 +23,9 @@ class AddGymWindow extends StatelessWidget
   Widget build(BuildContext context)
   {
     return MaterialApp(
+      theme: ThemeData(
+          primaryColor: Color.fromRGBO(181, 152, 240, 1.0),
+      ),
       home: AddGym(),
     );
   }
