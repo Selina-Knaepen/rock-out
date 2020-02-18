@@ -28,6 +28,14 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  flutter_launcher_icons: "^0.7.3"
+
+flutter_icons:
+  adaptive_icon_background: "assets/rock-out-bg.png"
+  adaptive_icon_foreground: "assets/rock-out-fg.png"
+  android: true
+  ios: true
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
