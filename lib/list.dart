@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rock_out/main.dart';
+import 'package:rock_out/models/gym.dart';
+import 'package:rock_out/repositories/mockGymRepository.dart';
 
 class GymNames extends StatefulWidget
 {
@@ -10,20 +12,27 @@ class GymNames extends StatefulWidget
 
 class GymNameState extends State<GymNames>
 {
-  final gymNames = <String>['Crux', 'Boulder', 'Klimzaal Wallstreet',
-    'Klimzaal Blok'];
-  final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
+  MockGymRepository _gymRepository = new MockGymRepository();
+  List<Gym> gyms;
+  List<String> gymNames;
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context)
   {
+    gyms = _gymRepository.gyms;
+    gymNames = new List<String>();
+    for (Gym gym in gyms) {
+      gymNames.add(gym.name);
+    }
+
     return Scaffold(
-      key: scaffoldKey,
+      key: _scaffoldKey,
       appBar: AppBar(
         title: Text("Gym List"),
         backgroundColor: Color.fromRGBO(150, 182, 249, 1.0),
         leading: IconButton(icon: Icon(Icons.menu, color: Colors.white),
-          onPressed: () => scaffoldKey.currentState.openDrawer(),
+          onPressed: () => _scaffoldKey.currentState.openDrawer(),
         ),
       ),
       body: buildList(),
