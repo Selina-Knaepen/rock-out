@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:rock_out/main.dart';
 
 class AddGym extends StatefulWidget
 {
@@ -13,16 +14,25 @@ class AddGymState extends State<AddGym>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-            "Add Gym",
-            style: TextStyle(color: Colors.white),
-        ),
-        backgroundColor: Color.fromRGBO(150, 182, 249, 1.0),
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: new Scaffold(
+          appBar: AppBar(
+            title: Text(
+              "Add Gym",
+            ),
+            leading: IconButton(icon: Icon(Icons.arrow_back),
+              onPressed: () => Navigator.pop(context),
+              color: Colors.white,
+            ),
+            backgroundColor: Color.fromRGBO(150, 182, 249, 1.0),
+          ),
+          body: buildForm()
       ),
-      body: buildForm()
     );
+
+//    onPressed: () => Navigator.push(context,
+//        MaterialPageRoute(builder: (context) => RockOutMain())),
   }
 
   Widget buildForm()

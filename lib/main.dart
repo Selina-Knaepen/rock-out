@@ -12,6 +12,10 @@ class RockOutMain extends StatelessWidget
   {
     return MaterialApp(
       title: 'Rock Out',
+      theme: ThemeData(
+        primaryColor: Color.fromRGBO(181, 152, 240, 1.0),
+        primaryTextTheme: Theme.of(context).primaryTextTheme.apply(bodyColor: Colors.white)
+       ),
       home: GymNames()
     );
   }
@@ -22,11 +26,8 @@ class AddGymWindow extends StatelessWidget
   @override
   Widget build(BuildContext context)
   {
-    return MaterialApp(
-      theme: ThemeData(
-          primaryColor: Color.fromRGBO(181, 152, 240, 1.0),
-      ),
-      home: AddGym(),
+    return Scaffold(
+      body: AddGym(),
     );
   }
 }
