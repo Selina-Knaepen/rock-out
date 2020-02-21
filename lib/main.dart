@@ -14,7 +14,7 @@ class RockOutMain extends StatelessWidget
       title: 'Rock Out',
       theme: ThemeData(
         primaryColor: Color.fromRGBO(181, 152, 240, 1.0),
-        primaryTextTheme: Theme.of(context).primaryTextTheme.apply(bodyColor: Colors.white)
+        primaryTextTheme: Theme.of(context).primaryTextTheme.apply(bodyColor: Colors.white),
        ),
       home: GymNames()
     );
