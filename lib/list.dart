@@ -12,16 +12,45 @@ class GymNameState extends State<GymNames>
 {
   final gymNames = <String>['Crux', 'Boulder', 'Klimzaal Wallstreet',
     'Klimzaal Blok'];
+  final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context)
   {
     return Scaffold(
+      key: scaffoldKey,
       appBar: AppBar(
         title: Text("Gym List"),
         backgroundColor: Color.fromRGBO(150, 182, 249, 1.0),
+        leading: IconButton(icon: Icon(Icons.menu, color: Colors.white),
+          onPressed: () => scaffoldKey.currentState.openDrawer(),
+        ),
       ),
       body: buildList(),
+      drawer: Drawer(
+        child: ListView(
+          children: <Widget>[
+            Container(
+              height: 75.0,
+              child: DrawerHeader(
+                child: Text(
+                  "Rock Out",
+                  style: TextStyle(color: Colors.white),
+                ),
+                decoration: BoxDecoration(
+                  color: Color.fromRGBO(150, 182, 249, 1.0),
+                ),
+              ),
+            ),
+            ListTile(
+              title: Text('Profile'),
+              onTap: () {
+                // TODO: Add functionality
+              },
+            )
+          ],
+        ),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
