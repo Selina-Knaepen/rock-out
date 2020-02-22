@@ -54,6 +54,12 @@ class AddGymState extends State<AddGym>
             padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
             child:
             TextFormField(
+              validator: (value) {
+                if (value.isEmpty) {
+                  return "You can't have an empty name";
+                }
+                return null;
+              },
               decoration: const InputDecoration(
                 hintText: "Enter the gym name",
                 hintStyle: TextStyle(fontSize: 14),
@@ -97,6 +103,19 @@ class AddGymState extends State<AddGym>
                 hintStyle: TextStyle(fontSize: 14),
               ),
               cursorColor: Color.fromRGBO(181, 152, 240, 1.0),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
+            child: RaisedButton(
+              onPressed: () {
+                if (formKey.currentState.validate()) {
+                  Scaffold.of(context).showSnackBar(SnackBar(
+                    content: Text("Processing Data")
+                  ));
+                }
+              },
+              child: Text("Submit"),
             ),
           ),
         ],
