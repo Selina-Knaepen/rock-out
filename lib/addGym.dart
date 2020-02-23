@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rock_out/main.dart';
+import 'package:rock_out/repositories/mockGymRepository.dart';
+
+import 'models/gym.dart';
 
 class AddGym extends StatefulWidget
 {
@@ -11,6 +14,31 @@ class AddGym extends StatefulWidget
 class AddGymState extends State<AddGym>
 {
   final formKey = GlobalKey<FormState>();
+  MockGymRepository _gymRepository = new MockGymRepository();
+  Gym gym;
+  final nameController = TextEditingController();
+  final addressController = TextEditingController();
+  final websiteController = TextEditingController();
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    addressController.dispose();
+    websiteController.dispose();
+    super.dispose();
+  }
+
+  void createGym(String name, String address, String website) {
+    if (address.isEmpty) {
+      address = "Unknown";
+    }
+
+    if (website.isEmpty) {
+      website = "Unknown";
+    }
+
+    gym = new Gym(name, address, website);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,14 +58,12 @@ class AddGymState extends State<AddGym>
           body: buildForm()
       ),
     );
-
-//    onPressed: () => Navigator.push(context,
-//        MaterialPageRoute(builder: (context) => RockOutMain())),
   }
 
   Widget buildForm()
   {
-    return Form(
+    return SingleChildScrollView(
+      child: Form(
       key: formKey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,6 +86,7 @@ class AddGymState extends State<AddGym>
                 }
                 return null;
               },
+              controller: nameController,
               decoration: const InputDecoration(
                 hintText: "Enter the gym name",
                 hintStyle: TextStyle(fontSize: 14),
@@ -79,6 +106,7 @@ class AddGymState extends State<AddGym>
             padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
             child:
             TextFormField(
+              controller: addressController,
               decoration: const InputDecoration(
                 hintText: "Enter the gym address",
                 hintStyle: TextStyle(fontSize: 14),
@@ -98,6 +126,7 @@ class AddGymState extends State<AddGym>
             padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
             child:
             TextFormField(
+              controller: websiteController,
               decoration: const InputDecoration(
                 hintText: "Enter the gym website",
                 hintStyle: TextStyle(fontSize: 14),
@@ -110,9 +139,11 @@ class AddGymState extends State<AddGym>
             child: RaisedButton(
               onPressed: () {
                 if (formKey.currentState.validate()) {
-                  Scaffold.of(context).showSnackBar(SnackBar(
-                    content: Text("Processing Data")
-                  ));
+                  createGym(nameController.text, addressController.text, websiteController.text);
+//                  _gymRepository.addGym(gym);
+                  _sendResultBack(context);
+//                  Navigator.push(context,
+//                  MaterialPageRoute(builder: (context) => RockOutMain()));
                 }
               },
               child: Text("Submit"),
@@ -120,6 +151,11 @@ class AddGymState extends State<AddGym>
           ),
         ],
       ),
+    ),
     );
+  }
+
+  void _sendResultBack(BuildContext context) {
+    Navigator.pop(context, gym);
   }
 }

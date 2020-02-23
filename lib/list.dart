@@ -14,17 +14,12 @@ class GymNameState extends State<GymNames>
 {
   MockGymRepository _gymRepository = new MockGymRepository();
   List<Gym> gyms;
-  List<String> gymNames;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context)
   {
     gyms = _gymRepository.gyms;
-    gymNames = new List<String>();
-    for (Gym gym in gyms) {
-      gymNames.add(gym.name);
-    }
 
     return Scaffold(
       key: _scaffoldKey,
@@ -62,9 +57,10 @@ class GymNameState extends State<GymNames>
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => AddGymWindow())
-          );
+          _awaitReturnValueAddGymScreen(context);
+//          Navigator.push(
+//              context, MaterialPageRoute(builder: (context) => AddGymWindow())
+//          );
         },
         child: Icon(Icons.add),
         backgroundColor: Color.fromRGBO(181, 152, 240, 1.0),
@@ -78,14 +74,24 @@ class GymNameState extends State<GymNames>
       separatorBuilder: (context, index) => Divider(
         color: Colors.black,
       ),
-      itemCount: gymNames.length,
+      itemCount: gyms.length,
       itemBuilder: (BuildContext context, int index)
       {
         return Container(
           padding: const EdgeInsets.all(8),
-          child: Text('${gymNames[index]}', style: TextStyle(fontSize: 21.0)),
+          child: Text('${gyms[index].name}', style: TextStyle(fontSize: 21.0)),
         );
       },
     );
+  }
+
+  void _awaitReturnValueAddGymScreen(BuildContext context) async {
+    final result = await Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => AddGymWindow()));
+    setState(() {
+      _gymRepository.addGym(result);
+      gyms = _gymRepository.gyms;
+    });
   }
 }

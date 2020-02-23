@@ -4,16 +4,20 @@ class MockGymRepository {
   List<Gym> _gyms = new List<Gym>();
 
   MockGymRepository() {
-    addGym("Crux");
-    addGym("Boulder");
-    addGym("Boulder Mania");
-    addGym("City Lizard");
-    addGym("Klimax");
-    addGym("Maniak");
+    addGymByValues("Crux");
+    addGymByValues("Boulder");
+    addGymByValues("Boulder Mania");
+    addGymByValues("City Lizard");
+    addGymByValues("Klimax");
+    addGymByValues("Maniak");
   }
 
-  addGym(String name) {
-    _gyms.add(new Gym(name));
+  addGymByValues(String name, [String address = "Unknown", String website = "Unknown"]) {
+    _gyms.add(new Gym(name, address, website));
+  }
+
+  addGym(Gym gym) {
+    _gyms.add(gym);
   }
 
   List<Gym> get gyms {
