@@ -3,7 +3,7 @@ class Gym {
   String _address;
   String _website;
 
-  Gym(this._name, [this._address = "Unknown", this._website = "Unknown"]);
+  Gym(this._name, this._address, this._website);
 
   String get name {
     return _name;
